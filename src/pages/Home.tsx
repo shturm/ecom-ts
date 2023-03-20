@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import React, { Component } from 'react'
 
 type HomeProps = {}
@@ -11,6 +12,8 @@ export default class Home extends Component<HomeProps, HomeState> {
     return (
       <div>
         Home
+        <Button variant="contained">Hello World</Button>
+
       </div>
     )
   }

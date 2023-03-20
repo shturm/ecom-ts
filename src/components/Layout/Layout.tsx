@@ -17,6 +17,7 @@ function Layout(children: any) {
         <ul>
           <li> <Link to={"/home"}>home</Link> </li>
           <li> <Link to={"/category"}>category</Link> </li>
+          <li> <Link to={"/product/1337"}>product 1337</Link> </li>
           <li> <Link to={"/search"}>search</Link> </li>
           <li> <Link to={"/contact"}>Contact</Link> </li>
           <li> <Link to={"/cart"}>Cart</Link> </li>

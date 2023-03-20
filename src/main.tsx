@@ -1,6 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+
 import Home from './pages/Home'
 import Layout from './components/Layout/Layout'
 import './main.css'
@@ -12,6 +18,7 @@ import {
 import NotFound from './pages/NotFound'
 import Contact from './pages/Contact'
 import Cart from './pages/Cart'
+import Product, { productLoader } from './pages/Product';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +29,11 @@ const router = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/contact", element: <Contact /> },
       { path: "/category", element: <NotFound /> },
+      { 
+        path: "/product/:productId", 
+        element: <Product />, 
+        loader: productLoader
+      },
       { path: "/search", element: <NotFound /> },
       { path: "/search/:query", element: <NotFound /> },
       { path: "/cart", element: <Cart /> },
