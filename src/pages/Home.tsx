@@ -1,17 +1,21 @@
 import { Button } from '@mui/material'
 import React, { Component } from 'react'
+import '@testing-library/jest-dom'
 
-type HomeProps = {}
 
-type HomeState = {}
+export type Props = {
+  // aHomeProp: boolean
+}
 
-export default class Home extends Component<HomeProps, HomeState> {
+type State = {}
+
+export default class Home extends Component<Props, State> {
   state = {}
 
   render() {
     return (
-      <div>
-        Home
+      <div data-testid="page-home">
+        <h2>Home</h2>
         <Button variant="contained">Hello World</Button>
 
       </div>
