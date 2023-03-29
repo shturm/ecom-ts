@@ -82,7 +82,9 @@ export function DrawerAppBar(props: Props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        <Link to="/">
+          Safetyshoes.bg
+        </Link>
       </Typography>
       <Divider />
       <List>
@@ -119,7 +121,11 @@ export function DrawerAppBar(props: Props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            <Link to="/">
+              <Button sx={{ color: '#fff' }}>
+                  Safetyshoes.bg
+              </Button>
+        </Link>
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
