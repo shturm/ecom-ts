@@ -15,16 +15,21 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
-import NotFound from './pages/NotFound'
-import Contact from './pages/Contact'
-import Cart from './pages/Cart'
-import Product, { productLoader } from './pages/Product';
-import Pricing from './components/Pricing/Pricing';
 import { router } from './Navigation/Navigation';
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
   </React.StrictMode>,
 )

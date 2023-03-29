@@ -23,12 +23,20 @@ import Container from '@mui/material/Container';
 import { DrawerAppBar, navItems } from '../../Navigation/Navigation';
 import { Footer } from '../Footer/Footer'
 
+// import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+// const darkTheme = createTheme({
+//   palette: {
+//     mode: 'dark',
+//   },
+// });
+
 
 function LayoutContent() {
   return (
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <DrawerAppBar/>
       <Container component="main">
         <Outlet/>
