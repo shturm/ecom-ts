@@ -1,6 +1,5 @@
 import { Button } from '@mui/material'
 import React, { Component } from 'react'
-import '@testing-library/jest-dom'
 
 
 export type Props = {

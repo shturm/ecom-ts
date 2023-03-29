@@ -19,6 +19,7 @@ import NotFound from './pages/NotFound'
 import Contact from './pages/Contact'
 import Cart from './pages/Cart'
 import Product, { productLoader } from './pages/Product';
+import Pricing from './components/Pricing/Pricing';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "/home", element: <Home /> },
+      { path: "/pricing", element: <Pricing /> },
       { path: "/contact", element: <Contact /> },
       { path: "/category", element: <NotFound /> },
       { 
