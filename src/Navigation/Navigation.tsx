@@ -8,14 +8,16 @@ import Pricing from '../components/Pricing/Pricing';
 import Layout from "../components/Layout/Layout";
 import Home from "../pages/Home";
 
+import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
+
 export const navItems = [
-    { href: "/product/1337", title: "Product" },
-    { href: "/pricing", title: "Pricing" },
-    { href: "/contact", title: "Contact" },
-    { href: "/category", title: "Category" },
-    { href: "/search", title: "Search" },
-    { href: "/cart", title: "Cart" },
-    { href: "/not-found", title: "Not" },
+    { href: "/product/1337", title: "Product"},
+    { href: "/pricing", title: "Pricing"},
+    { href: "/contact", title: "Contact"},
+    { href: "/category", title: "Category"},
+    { href: "/search", title: "Search"},
+    { href: "/cart", title: "Cart", icon: <ShoppingCartTwoToneIcon/>},
+    { href: "/not-found", title: "Not"},
   ];
 
   export const router = createBrowserRouter([

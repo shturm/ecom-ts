@@ -24,35 +24,6 @@ import { navItems } from '../../Navigation/Navigation';
 import { Footer } from '../Footer/Footer'
 
 
-
-
-
-
-const footers = [
-  {
-    title: 'Safetyshoes.bg',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: [
-      'Cool stuff',
-      'Random feature',
-      'Team feature',
-      'Developer stuff',
-      'Another one',
-    ],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
-
 function LayoutContent() {
   return (
     <React.Fragment>
@@ -75,6 +46,7 @@ function LayoutContent() {
                 color="text.primary"
                 sx={{ my: 1, mx: 1.5 }} key={navItem.title} 
                 href={navItem.href}>
+                  {navItem.icon}
                   {navItem.title}
               </Link>
             )}
