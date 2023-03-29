@@ -20,7 +20,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-import { navItems } from '../../Navigation/Navigation';
+import { DrawerAppBar, navItems } from '../../Navigation/Navigation';
 import { Footer } from '../Footer/Footer'
 
 
@@ -29,34 +29,7 @@ function LayoutContent() {
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
-      <AppBar
-        position="static"
-        color="default"
-        elevation={0}
-        sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-      >
-        <Toolbar sx={{ flexWrap: 'wrap' }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            <Link href="/">Safetyshoes.bg</Link>
-          </Typography>
-          <nav>
-            {navItems.map(navItem => 
-              <Link 
-                variant="button"
-                color="text.primary"
-                sx={{ my: 1, mx: 1.5 }} key={navItem.title} 
-                href={navItem.href}>
-                  {navItem.icon}
-                  {navItem.title}
-              </Link>
-            )}
-
-          </nav>
-          {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button> */}
-        </Toolbar>
-      </AppBar>
+      <DrawerAppBar/>
       <Container component="main">
         <Outlet/>
       </Container>
