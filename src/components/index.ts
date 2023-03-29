@@ -1,3 +1,6 @@
-import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
+export * from "./Breadcrumbs/Breadcrumbs";
+export * from "./Footer/Footer";
+export * from "./Layout/Layout";
+export * from "./Footer/Footer";
 
-export Breadcrumbs
+export * from "./Pricing/Pricing";
