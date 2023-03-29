@@ -21,24 +21,9 @@ import Link from '@mui/material/Link';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const navItems = [
-  { href: "/home", title: "Home" },
-  { href: "/pricing", title: "Pricing" },
   { href: "/product/1337", title: "Product" },
+  { href: "/pricing", title: "Pricing" },
   { href: "/contact", title: "Contact" },
   { href: "/category", title: "Category" },
   { href: "/search", title: "Search" },
@@ -46,48 +31,24 @@ const navItems = [
   { href: "/not-found", title: "Not" },
 ];
 
-const tiers = [
-  {
-    title: 'Free',
-    price: '0',
-    description: [
-      '10 users included',
-      '2 GB of storage',
-      'Help center access',
-      'Email support',
-    ],
-    buttonText: 'Sign up for free',
-    buttonVariant: 'outlined',
-  },
-  {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-    ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
-  },
-  {
-    title: 'Enterprise',
-    price: '30',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
-    ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
-  },
-];
+function Copyright(props: any) {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://safetyshoes.bg/">
+      Safetyshoes.bg
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+
+
 const footers = [
   {
-    title: 'Company',
+    title: 'Safetyshoes.bg',
     description: ['Team', 'History', 'Contact us', 'Locations'],
   },
   {
@@ -123,7 +84,7 @@ function LayoutContent() {
       >
         <Toolbar sx={{ flexWrap: 'wrap' }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-            Company name
+            <Link href="/">Safetyshoes.bg</Link>
           </Typography>
           <nav>
             {navItems.map(navItem => 
@@ -137,9 +98,9 @@ function LayoutContent() {
             )}
 
           </nav>
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+          {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
             Login
-          </Button>
+          </Button> */}
         </Toolbar>
       </AppBar>
       <Container component="main">
@@ -156,7 +117,7 @@ function LayoutContent() {
           py: [3, 6],
         }}
       >
-        <Grid container spacing={4} justifyContent="space-evenly">
+        {/* <Grid container spacing={4} justifyContent="space-evenly">
           {footers.map((footer) => (
             <Grid item xs={6} sm={3} key={footer.title}>
               <Typography variant="h6" color="text.primary" gutterBottom>
@@ -173,7 +134,7 @@ function LayoutContent() {
               </ul>
             </Grid>
           ))}
-        </Grid>
+        </Grid> */}
         <Copyright sx={{ mt: 5 }} />
       </Container>
       {/* End footer */}

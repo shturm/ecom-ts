@@ -6,7 +6,7 @@ export async function productLoader( {params }) {
     const result = await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve({"name": `Product ${params.productId}`, "productId": params.productId});
-        }, 1500);
+        }, 100);
     });
     // const result = await Promise.resolve({"name": `Product ${params.productId}`, "productId": params.productId});
     return result;
