@@ -38,7 +38,7 @@ function LayoutContent() {
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       {/* <CssBaseline /> */}
       <DrawerAppBar/>
-      <Container component="main">
+      <Container component="main" maxWidth="lg">
         <Outlet/>
       </Container>
       

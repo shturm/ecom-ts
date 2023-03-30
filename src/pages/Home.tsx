@@ -1,5 +1,6 @@
 import { Button } from '@mui/material'
 import React, { Component } from 'react'
+import { ProductTile, ProductTileGrid } from '../components'
 
 
 export type Props = {
@@ -14,9 +15,7 @@ export default class Home extends Component<Props, State> {
   render() {
     return (
       <div data-testid="page-home">
-        <h2>Home</h2>
-        <Button variant="contained">Hello World</Button>
-
+        <ProductTileGrid />
       </div>
     )
   }
