@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link } from "react-router-dom";
+import { createBrowserRouter, Link, useNavigate } from "react-router-dom";
 
 import NotFound from '../pages/NotFound';
 import Contact from '../pages/Contact';
@@ -74,6 +74,7 @@ const drawerWidth = 240;
 export function DrawerAppBar(props: Props) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -83,17 +84,19 @@ export function DrawerAppBar(props: Props) {
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         <Link to="/">
-          Safetyshoes.bg
+          <Button >
+            Safetyshoes.bg
+          </Button>
         </Link>
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item.title} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.title} />
-            </ListItemButton>
+              <ListItemButton sx={{ textAlign: 'center' }} onClick={(e) => navigate(item.href)}>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
           </ListItem>
         ))}
       </List>
@@ -129,7 +132,7 @@ export function DrawerAppBar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Link to={item.href}>
+              <Link key={item.title} to={item.href}>
                 <Button key={item.title} sx={{ color: '#fff' }}>
                   {item.icon}
                   {item.title}
