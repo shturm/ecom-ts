@@ -2,7 +2,7 @@ import React, { Component, useEffect } from 'react'
 import { useLoaderData, useParams } from 'react-router-dom';
 
 // set to be used in main.tsx -> router
-export async function productLoader( {params }) {
+export async function productLoader( params: any) {
     const result = await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve({"name": `Product ${params.productId}`, "productId": params.productId});

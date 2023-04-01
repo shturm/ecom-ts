@@ -7,6 +7,7 @@ import Product, { productLoader } from '../pages/Product';
 import Pricing from '../components/Pricing/Pricing';
 import Layout from "../components/Layout/Layout";
 import Home from "../pages/Home";
+import { Category } from "../pages/Category";
 
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 
@@ -29,6 +30,7 @@ import { Icon, ListItemIcon } from "@mui/material";
 
 import './Navigation.css';
 
+
 export const navItems = [
   { href: "/product/1337", title: "Product"},
   { href: "/pricing", title: "Pricing"},
@@ -49,7 +51,7 @@ export const router = createBrowserRouter([
       { path: "/home", element: <Home /> },
       { path: "/pricing", element: <Pricing /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/category", element: <NotFound /> },
+      { path: "/category", element: <Category /> },
       { 
         path: "/product/:productId", 
         element: <Product />, 
