@@ -3,7 +3,7 @@ import { createBrowserRouter, Link, useNavigate } from "react-router-dom";
 import NotFound from '../pages/NotFound';
 import Contact from '../pages/Contact';
 import Cart from '../pages/Cart';
-import Product, { productLoader } from '../pages/Product';
+import ProductPage, { productLoader } from '../pages/ProductPage';
 import Pricing from '../components/Pricing/Pricing';
 import Layout from "../components/Layout/Layout";
 import Home from "../pages/Home";
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
       { path: "/category", element: <Category /> },
       { 
         path: "/product/:productId", 
-        element: <Product />, 
+        element: <ProductPage />, 
         loader: productLoader
       },
       { path: "/search", element: <NotFound /> },
