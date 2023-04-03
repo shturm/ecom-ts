@@ -1,5 +1,6 @@
 import React, { Component, useEffect } from 'react'
 import { useLoaderData, useParams } from 'react-router-dom';
+import products from '../../data/products.json';
 
 // set to be used in main.tsx -> router
 export async function productLoader( params: any) {
