@@ -50,7 +50,7 @@ export function ProductTile (props: IProductTileProps) {
                 }}
                 >
                 <Typography component="h6" variant="h6" color="text.primary">
-                    {props.product.Price} лв.
+                    {props.product.Price.toFixed(2)} лв.
                 </Typography>
                 </Box>
             </CardContent>

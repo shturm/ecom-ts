@@ -31,6 +31,7 @@ export default function ProductPage ({}:Props) {
       <ul>
         <li>Product ID: {product.Index}</li>
         <li>Product Name: {product.TradeName}</li>
+        <li>Product Price: {product.Price.toFixed(2)}</li>
       </ul>
     </>
   )
