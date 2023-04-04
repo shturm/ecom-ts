@@ -4,12 +4,12 @@ import { Product } from '../data/product.types';
 
 // set to be used in main.tsx -> router
 import productsUntyped from '../data/products.json';
-export async function productLoader( data: any) {
+export async function productLoader( routeData: any) {
     const result = await new Promise((resolve, reject) => {
         setTimeout(() => {
             // resolve({"name": `Product ${data.params.productId}`, "productId": data.params.productId});
             const products: Product[] = productsUntyped as Product[];
-            resolve(products.filter(p => p.Index == data.params.productId)[0]);
+            resolve(products.filter(p => p.Index == routeData.params.productId)[0]);
         }, 100);
     });
     // const result = await Promise.resolve({"name": `Product ${params.productId}`, "productId": params.productId});
