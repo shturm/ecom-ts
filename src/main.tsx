@@ -7,7 +7,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 
-import Home from './pages/Home'
+import HomePage from './pages/HomePage'
 import Layout from './components/Layout/Layout'
 import './main.css'
 

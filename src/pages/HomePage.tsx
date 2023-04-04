@@ -14,7 +14,7 @@ export type Props = {
 
 type State = {}
 
-export default class Home extends Component<Props, State> {
+export default class HomePage extends Component<Props, State> {
   state = {}
 
   render() {

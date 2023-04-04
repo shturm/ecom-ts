@@ -4,7 +4,7 @@ type NotFoundProps = {}
 
 type NotFoundState = {}
 
-export default class NotFound extends Component<NotFoundProps, NotFoundState> {
+export default class NotFoundPage extends Component<NotFoundProps, NotFoundState> {
   state = {}
 
   render() {

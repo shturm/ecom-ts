@@ -4,12 +4,12 @@ type Props = {}
 
 type State = {}
 
-export default class Cart extends Component<Props, State> {
+export default class ContactPage extends Component<Props, State> {
   state = {}
 
   render() {
     return (
-      <div>Cart</div>
+      <div>Contact</div>
     )
   }
 }

@@ -1,13 +1,13 @@
 import { createBrowserRouter, Link, useNavigate } from "react-router-dom";
 
-import NotFound from '../pages/NotFound';
-import Contact from '../pages/Contact';
-import Cart from '../pages/Cart';
+import NotFoundPage from '../pages/NotFoundPage';
+import ContactPage from '../pages/ContactPage';
+import CartPage from '../pages/CartPage';
 import ProductPage, { productLoader } from '../pages/ProductPage';
 import Pricing from '../components/Pricing/Pricing';
 import Layout from "../components/Layout/Layout";
-import Home from "../pages/Home";
-import { Category } from "../pages/Category";
+import HomePage from "../pages/HomePage";
+import { CategoryPage } from "../pages/CategoryPage";
 
 import ShoppingCartTwoToneIcon from '@mui/icons-material/ShoppingCartTwoTone';
 
@@ -45,23 +45,23 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    errorElement: <NotFound/>,
+    errorElement: <NotFoundPage/>,
     children: [
-      { index: true, element: <Home /> },
-      { path: "/home", element: <Home /> },
+      { index: true, element: <HomePage /> },
+      { path: "/home", element: <HomePage /> },
       { path: "/pricing", element: <Pricing /> },
-      { path: "/contact", element: <Contact /> },
-      { path: "/category", element: <Category /> },
+      { path: "/contact", element: <ContactPage /> },
+      { path: "/category", element: <CategoryPage /> },
       { 
         path: "/product/:productId", 
         element: <ProductPage />, 
         loader: productLoader
       },
-      { path: "/search", element: <NotFound /> },
-      { path: "/search/:query", element: <NotFound /> },
-      { path: "/cart", element: <Cart /> },
-      { path: "/not-found", element: <NotFound /> },
-      { path: "/not-found", element: <NotFound /> },
+      { path: "/search", element: <NotFoundPage /> },
+      { path: "/search/:query", element: <NotFoundPage /> },
+      { path: "/cart", element: <CartPage /> },
+      { path: "/not-found", element: <NotFoundPage /> },
+      { path: "/not-found", element: <NotFoundPage /> },
     ]
   }
 ]);
