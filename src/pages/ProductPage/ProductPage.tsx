@@ -6,8 +6,9 @@ import { Product } from "../../data/product.types";
 import productsUntyped from "../../data/products.json";
 import { Box, Button, Chip, Grid, TextField, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
+
 import { ProductDescription } from "./ProductDescription";
+import { ProductOrderWidget } from "./ProductOrderWidget";
 
 export async function productLoader(routeData: any) {
   const result = await new Promise((resolve, reject) => {
@@ -23,37 +24,53 @@ export async function productLoader(routeData: any) {
 }
 
 type Props = {
-  onAddToCart?: (product: Product, count: number) => void;
-};
-
-const defaultProps: Props = {
-  onAddToCart: (product: Product, count: number) =>
-    console.log("Added to cart", product.InternalName, count),
+  onAddToCart?: (product: Product, orderCount: number, size: number, additionalDetails: string) => void;
 };
 
 type State = {};
 
 // export default class Product extends Component<Props, State> {
-export default function ProductPage(props: Props = defaultProps) {
+export default function ProductPage(props: Props) {
   const product: Product = useLoaderData() as Product;
-
   const [mainImageUrl, setMainImageUrl] = useState(product.ImageUrlsShopify[0]);
-  const [orderCount, setOrderCount] = useState(1);
+  const [orderWidgetData, setOrderWidgetData] = useState({
+    size: product.Sizes[0],
+    orderCount: 1,
+    additionalDetails: "",
+  });
 
-  const onOrderCountChange = (event: any) => {
-    if (event.target.value < 1) {
-      setOrderCount(1);
+  const onOrderCountChange = (orderCount: number) => {
+    if (orderCount < 1) {
+      setOrderWidgetData((prevState) => {
+        return {
+          ...prevState,
+          orderCount: 1
+        }
+      });
     } else {
-      setOrderCount(event.target.value);
+      setOrderWidgetData((prevState) => {
+        return {
+          ...prevState,
+          orderCount: orderCount
+        }
+      });
     }
   };
 
-  const onAddToCartHandler = (product: Product, orderCount: number) => {
-    if (props.onAddToCart) return props.onAddToCart(product, orderCount);
+  const onAddToCartHandler = () => {
+    if (props.onAddToCart)
+      return props.onAddToCart(
+        product,
+        orderWidgetData.orderCount,
+        orderWidgetData.size,
+        orderWidgetData.additionalDetails
+      );
     console.warn(
       "ProductPage.tsx is not provided with props.onAddToCart",
       product,
-      orderCount
+      orderWidgetData.orderCount,
+      orderWidgetData.size,
+      orderWidgetData.additionalDetails
     );
   };
 
@@ -67,34 +84,15 @@ export default function ProductPage(props: Props = defaultProps) {
 
   const ProtectionCategory = () => {
     if (product.ProtectionCategory)
-      return (
-        <Chip
-          color="success"
-          label={product.ProtectionCategory}
-          icon={<DoneIcon />}
-        />
-      );
+      return <Chip color="success" label={product.ProtectionCategory} icon={<DoneIcon />} />;
     return null;
   };
-  return (
-    // <>
-    //   <h2>Product</h2>
-    //   <ul>
-    //     <li>Product ID: {product.Index}</li>
-    //     <li>Product Name: {product.TradeName}</li>
-    //     <li>Product Price: {product.Price.toFixed(2)}</li>
-    //   </ul>
-    // </>
 
+  return (
     <Grid container spacing={2}>
       <Grid item xs={6} md={6}>
         <Box>
-          <img
-            src={mainImageUrl}
-            alt={product.InternalName}
-            width={450}
-            height={450}
-          />
+          <img src={mainImageUrl} alt={product.InternalName} width={450} height={450} />
         </Box>
         <Box>
           {product.ImageUrlsShopify.map((url) => (
@@ -115,49 +113,30 @@ export default function ProductPage(props: Props = defaultProps) {
           {product.InternalName} <ProtectionCategory />
         </h1>
         <p>{product.Description}</p>
-        <Typography
-          component="span"
-          variant="caption"
-          sx={{ color: "text.primary", fontSize: 28 }}
-        >
-          Цена: {product.Price.toFixed(2)} лв.
-        </Typography>
-        <Typography
-          component="p"
-          variant="body1"
-          sx={{ color: "text.disabled", fontSize: 11 }}
-          mb={2}
-        >
-          с включено ДДС
-        </Typography>
-        <Box flexWrap={"nowrap"} display={"flex"} mt={2}>
-          <TextField
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-            sx={{
-              width: 70,
-              // padding: "10"
-            }}
-            label="Брой"
-            type="number"
-            value={orderCount}
-            onChange={onOrderCountChange}
-          />
-          <Button
-            onClick={() => {
-              onAddToCartHandler(product, orderCount);
-            }}
-            variant="outlined"
-            color="success"
-            endIcon={<ShoppingCartTwoToneIcon />}
-            size="large"
-          >
-            ДОБАВИ В КОЛИЧКАТА
-          </Button>
-        </Box>
+        <ProductOrderWidget
+          product={product}
+          orderCount={orderWidgetData.orderCount}
+          size={orderWidgetData.size}
+          additionalDetails={orderWidgetData.additionalDetails}
+          onAdditionalDetailsChange={(val) => setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })}
+          onOrderCountChange={onOrderCountChange}
+          onSizeChange={(val) => setOrderWidgetData({ ...orderWidgetData, size: val })}
+          onAddToCart={onAddToCartHandler}
+        />
       </Grid>
       <Grid item xs={12} md={12}>
-            <ProductDescription product={product} />
-        </Grid>
+        <ProductDescription product={product} />
+        <ProductOrderWidget
+          product={product}
+          orderCount={orderWidgetData.orderCount}
+          size={orderWidgetData.size}
+          additionalDetails={orderWidgetData.additionalDetails}
+          onAdditionalDetailsChange={(val) => setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })}
+          onOrderCountChange={onOrderCountChange}
+          onSizeChange={(val) => setOrderWidgetData({ ...orderWidgetData, size: val })}
+          onAddToCart={onAddToCartHandler}
+        />
+      </Grid>
     </Grid>
   );
 }
