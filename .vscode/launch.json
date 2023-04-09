@@ -16,7 +16,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:5173",
+            "url": "http://localhost:5173/product/01-110831",
             "webRoot": "${workspaceFolder}/src"
         }
     ]

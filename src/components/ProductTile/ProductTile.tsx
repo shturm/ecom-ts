@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 import * as React from 'react';
 import { Product } from '../../data/product.types';
 import { useNavigate } from 'react-router-dom';
-import { productLoader } from '../../pages/ProductPage';
+import { productLoader } from '../../pages/ProductPage/ProductPage';
 
 export interface IProductTileProps {
     product: Product
@@ -50,7 +50,7 @@ export function ProductTile (props: IProductTileProps) {
                     <Typography component="h6" variant="h6" color="text.primary">
                         {props.product.Price.toFixed(2)} лв.
                     </Typography>
-                    <Typography component="p" variant="string" sx={{color: "text.disabled", fontSize: 11}}>
+                    <Typography component="p" variant="body1" sx={{color: "text.disabled", fontSize: 11}}>
                         С включено ДДС
                     </Typography>
                     </Box>
