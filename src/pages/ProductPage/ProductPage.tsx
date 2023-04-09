@@ -111,10 +111,10 @@ export default function ProductPage(props: Props) {
         </h1>
         <p>{product.Description}</p>
         <ProductOrderWidget
-          product={product}
-          orderCount={orderWidgetData.orderCount}
-          size={orderWidgetData.size}
-          additionalDetails={orderWidgetData.additionalDetails}
+          OrderProduct={product}
+          OrderCount={orderWidgetData.orderCount}
+          OrderSize={orderWidgetData.size}
+          OrderAdditionalDetails={orderWidgetData.additionalDetails}
           onAdditionalDetailsChange={(val) => setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })}
           onOrderCountChange={onOrderCountChange}
           onSizeChange={(val) => setOrderWidgetData({ ...orderWidgetData, size: val })}
@@ -124,10 +124,10 @@ export default function ProductPage(props: Props) {
       <Grid item xs={12} md={12}>
         <ProductDescription product={product} />
         <ProductOrderWidget
-          product={product}
-          orderCount={orderWidgetData.orderCount}
-          size={orderWidgetData.size}
-          additionalDetails={orderWidgetData.additionalDetails}
+          OrderProduct={product}
+          OrderCount={orderWidgetData.orderCount}
+          OrderSize={orderWidgetData.size}
+          OrderAdditionalDetails={orderWidgetData.additionalDetails}
           onAdditionalDetailsChange={(val) => setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })}
           onOrderCountChange={onOrderCountChange}
           onSizeChange={(val) => setOrderWidgetData({ ...orderWidgetData, size: val })}

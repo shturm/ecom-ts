@@ -1,7 +1,8 @@
 import { Product } from "../data/product.types";
 
-interface IOrderRecord {
+export default interface IOrderRecord {
     OrderProduct: Product
     OrderCount: number
+    OrderSize: number
     OrderAdditionalDetails: string
 }

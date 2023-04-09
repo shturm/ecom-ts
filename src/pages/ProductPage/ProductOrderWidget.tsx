@@ -2,12 +2,14 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typo
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import * as React from "react";
 import { Product } from "../../data/product.types";
+import IOrderRecord from "../../Models/IOrderRecord"
 
-export default interface IProductOrderWidgetProps {
-  product: Product;
-  orderCount: number;
-  size: number;
-  additionalDetails: string;
+export default interface IProductOrderWidgetProps extends IOrderRecord {
+  // product: Product;
+  // orderCount: number;
+  // size: number;
+  // additionalDetails: string;
+  
   onSizeChange: (size: number) => void;
   onOrderCountChange: (orderCount: number) => void;
   onAdditionalDetailsChange: (text: string) => void;
@@ -34,7 +36,7 @@ export function ProductOrderWidget(props: IProductOrderWidgetProps) {
   return (
     <React.Fragment>
       <Typography component="span" variant="caption" sx={{ color: "text.primary", fontSize: 28 }}>
-        Цена: {props.product.Price.toFixed(2)} лв.
+        Цена: {props.OrderProduct.Price.toFixed(2)} лв.
       </Typography>
       <Typography component="p" variant="body1" sx={{ color: "text.disabled", fontSize: 11 }} mb={2}>
         с включено ДДС
@@ -46,11 +48,11 @@ export function ProductOrderWidget(props: IProductOrderWidgetProps) {
             <Select
               labelId="simple-select-label-size"
               id="simple-select-label-size"
-              value={props.size}
+              value={props.OrderSize}
               label="Age"
               onChange={(e) => onSizeChangeHandler(Number(e.target.value))}
             >
-              {props.product.Sizes.map((x) => (
+              {props.OrderProduct.Sizes.map((x) => (
                 <MenuItem key={x} value={x}>{x.toString()}</MenuItem>
               ))}
             </Select>
@@ -63,18 +65,18 @@ export function ProductOrderWidget(props: IProductOrderWidgetProps) {
             }}
             label="Брой"
             type="number"
-            value={props.orderCount}
+            value={props.OrderCount}
             onChange={(e) => onOrderCountChangeHandler(parseInt(e.target.value))}
           />
           <TextField
             label={"Допълнителни инструкции"}
             sx={{ width: 424 }}
-            value={props.additionalDetails}
+            value={props.OrderAdditionalDetails}
             onChange={(e) => onAdditionalDetailsChangeHandler(e.target.value)}
           ></TextField>
         </Box>
         <Button
-          onClick={() => onAddToCartHandler(props.product, props.orderCount)}
+          onClick={() => onAddToCartHandler(props.OrderProduct, props.OrderCount)}
           variant="outlined"
           color="success"
           endIcon={<ShoppingCartTwoToneIcon />}
