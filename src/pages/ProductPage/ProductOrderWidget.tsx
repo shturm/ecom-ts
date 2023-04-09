@@ -48,7 +48,7 @@ export function ProductOrderWidget(props: IProductOrderWidgetProps) {
               id="simple-select-label-size"
               value={props.size}
               label="Age"
-              onChange={(e) => onSizeChangeHandler(parseInt(e.target.value))}
+              onChange={(e) => onSizeChangeHandler(Number(e.target.value))}
             >
               {props.product.Sizes.map((x) => (
                 <MenuItem key={x} value={x}>{x.toString()}</MenuItem>

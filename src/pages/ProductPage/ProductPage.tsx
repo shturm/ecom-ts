@@ -44,15 +44,15 @@ export default function ProductPage(props: Props) {
       setOrderWidgetData((prevState) => {
         return {
           ...prevState,
-          orderCount: 1
-        }
+          orderCount: 1,
+        };
       });
     } else {
       setOrderWidgetData((prevState) => {
         return {
           ...prevState,
-          orderCount: orderCount
-        }
+          orderCount: orderCount,
+        };
       });
     }
   };
@@ -65,13 +65,10 @@ export default function ProductPage(props: Props) {
         orderWidgetData.size,
         orderWidgetData.additionalDetails
       );
-    console.warn(
-      "ProductPage.tsx is not provided with props.onAddToCart",
+    console.warn("ProductPage.tsx is not provided with props.onAddToCart", {
+      ...orderWidgetData,
       product,
-      orderWidgetData.orderCount,
-      orderWidgetData.size,
-      orderWidgetData.additionalDetails
-    );
+    });
   };
 
   const smallImgStyle = {
