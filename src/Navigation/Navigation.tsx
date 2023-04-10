@@ -2,7 +2,7 @@ import { createBrowserRouter, Link, useNavigate } from "react-router-dom";
 
 import NotFoundPage from "../pages/NotFoundPage";
 import ContactPage from "../pages/ContactPage";
-import CartPage from "../pages/CartPage";
+import CartPage from "../pages/CartPage/CartPage";
 import ProductPage, { productLoader } from "../pages/ProductPage/ProductPage";
 import Pricing from "../components/Pricing/Pricing";
 import Layout from "../components/Layout/Layout";
