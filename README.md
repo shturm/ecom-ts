@@ -1,3 +1,4 @@
 # ecom-ts
 
-![image](https://user-images.githubusercontent.com/1025605/229854096-02072126-5139-49ec-8446-3c5cccd28a36.png)
+![image](https://user-images.githubusercontent.com/125602529/230770741-1712e0d4-75ad-42c8-a9a9-feabbf5826b3.png)
+

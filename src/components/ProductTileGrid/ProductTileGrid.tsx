@@ -10,7 +10,7 @@ export interface IProductTileGridProps {
 export function ProductTileGrid (props: IProductTileGridProps) {
     return (
         <React.Fragment>
-            <Grid container spacing={5} alignItems="flex-end">
+            <Grid container spacing={2} alignItems="flex-end">
                 {props.products.map(product => (
                     <ProductTile key={product.Index} product={product}/>
                 ))}
