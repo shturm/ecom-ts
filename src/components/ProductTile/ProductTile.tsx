@@ -1,3 +1,4 @@
+
 import {
   Button,
   Card,
@@ -15,6 +16,7 @@ import { Product } from "../../data/product.types";
 import { useNavigate } from "react-router-dom";
 import { productLoader } from "../../pages/ProductPage/ProductPage";
 
+
 export interface IProductTileProps {
   product: Product;
 }
@@ -30,6 +32,7 @@ export function ProductTile(props: IProductTileProps) {
 
   return (
     <React.Fragment>
+
       <Grid item xs={12} sm={6} md={4} lg={4}>
         <Card onClick={(e) => navigate(`/product/${props.product.Index}`)} sx={sxHover}>
           <CardHeader
@@ -64,6 +67,7 @@ export function ProductTile(props: IProductTileProps) {
           </CardContent>
         </Card>
       </Grid>
+
     </React.Fragment>
   );
 }
