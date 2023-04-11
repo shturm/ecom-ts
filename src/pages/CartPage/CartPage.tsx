@@ -1,10 +1,16 @@
 import { Box, Grid, Skeleton, Typography } from '@mui/material'
 import React, { Component } from 'react'
 import { CartOrderRecord } from './CartOrderRecord'
+import IOrderRecord from '../../Models/IOrderRecord'
 
-type ICartPageProps = {}
+type ICartPageProps = {
+  orderRecords?: IOrderRecord[]
+}
 
 type State = {}
+
+
+
 
 export default class CartPage extends Component<ICartPageProps, State> {
   state = {}
@@ -18,7 +24,8 @@ export default class CartPage extends Component<ICartPageProps, State> {
         <Grid container>
           <Grid item lg={6} md={6} xs={12}>
             
-            <CartOrderRecord SubTotal={0} OrderProduct={undefined} OrderCount={0} OrderSize={0} OrderAdditionalDetails={''} />
+            {/* <CartOrderRecord OrderProduct={undefined} OrderCount={0} OrderSize={0} OrderAdditionalDetails={''} /> */}
+
 
           </Grid>
 

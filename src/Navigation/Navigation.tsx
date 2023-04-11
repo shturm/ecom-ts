@@ -30,15 +30,22 @@ import { Icon, ListItemIcon } from "@mui/material";
 
 import "./Navigation.css";
 import { Product } from "../data/product.types";
+import { ProtectionCategory, protectionCategoryLoader } from "../pages/ProtectionCategory";
 
 export const navItems = [
-  { href: "/product/1337", title: "Product" },
-  { href: "/pricing", title: "Pricing" },
-  { href: "/contact", title: "Contact" },
-  { href: "/category", title: "Category" },
-  { href: "/search", title: "Search" },
-  { href: "/cart", title: "Cart", icon: <ShoppingCartTwoToneIcon /> },
-  { href: "/not-found", title: "Not" },
+  // { href: "/product/1337", title: "Product" },
+  // { href: "/pricing", title: "Pricing" },
+  { href: "/", title: "Всички" },
+  { href: "/protectionCategory/F2A", title: "F2A" },
+  { href: "/protectionCategory/SI", title: "SI" },
+  { href: "/protectionCategory/SIP", title: "SIP" },
+  { href: "/protectionCategory/S2", title: "S2" },
+  { href: "/protectionCategory/S3", title: "S3" },
+  { href: "/contact", title: "Контакт", disabled: true },
+  // { href: "/category", title: "Category" },
+  { href: "/search", title: "Търсене", disabled: true },
+  { href: "/cart", title: "Количка", icon: <ShoppingCartTwoToneIcon />, disabled: true},
+  // { href: "/not-found", title: "Not" },
 ];
 
 export const router = createBrowserRouter([
@@ -49,6 +56,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "/home", element: <HomePage /> },
+      { path: "/protectionCategory/:pc", element: <ProtectionCategory />, loader: protectionCategoryLoader },
       { path: "/pricing", element: <Pricing /> },
       { path: "/contact", element: <ContactPage /> },
       { path: "/category", element: <CategoryPage /> },
@@ -141,12 +149,12 @@ export function DrawerAppBar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Link key={item.title} to={item.href}>
-                <Button key={item.title} sx={{ color: "#fff" }}>
+              // <Link key={item.title} to={item.href}>
+                <Button key={item.title} sx={{ color: "#fff" }} disabled={item.disabled} href={item.href}>
                   {item.icon}
                   {item.title}
                 </Button>
-              </Link>
+              // </Link>
             ))}
           </Box>
         </Toolbar>
