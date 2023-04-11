@@ -2,7 +2,7 @@ import * as React from 'react';
 import IOrderRecord from '../../Models/IOrderRecord';
 
 export interface ICartOrderRecordProps extends IOrderRecord{
-    SubTotal: number
+    // SubTotal: number
 }
 
 export function CartOrderRecord (props: ICartOrderRecordProps) {
