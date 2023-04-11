@@ -11,6 +11,7 @@ type State = {}
 
 
 
+
 export default class CartPage extends Component<ICartPageProps, State> {
   state = {}
 
@@ -24,6 +25,7 @@ export default class CartPage extends Component<ICartPageProps, State> {
           <Grid item lg={6} md={6} xs={12}>
             
             {/* <CartOrderRecord OrderProduct={undefined} OrderCount={0} OrderSize={0} OrderAdditionalDetails={''} /> */}
+
 
           </Grid>
 
