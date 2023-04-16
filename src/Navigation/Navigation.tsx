@@ -37,14 +37,14 @@ export const navItems = [
   // { href: "/pricing", title: "Pricing" },
   { href: "/", title: "Всички" },
   { href: "/protectionCategory/F2A", title: "F2A" },
-  { href: "/protectionCategory/SI", title: "SI" },
-  { href: "/protectionCategory/SIP", title: "SIP" },
+  { href: "/protectionCategory/S1", title: "S1" },
   { href: "/protectionCategory/S2", title: "S2" },
   { href: "/protectionCategory/S3", title: "S3" },
+  { href: "/protectionCategory/S1P", title: "S1P" },
   { href: "/contact", title: "Контакт", disabled: true },
   // { href: "/category", title: "Category" },
   { href: "/search", title: "Търсене", disabled: true },
-  { href: "/cart", title: "Количка", icon: <ShoppingCartTwoToneIcon />, disabled: true},
+  { href: "/cart", title: "Количка", icon: <ShoppingCartTwoToneIcon />, disabled: false},
   // { href: "/not-found", title: "Not" },
 ];
 
