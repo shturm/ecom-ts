@@ -3,6 +3,7 @@ import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import * as React from "react";
 import { Product } from "../../data/product.types";
 import IOrderRecord from "../../Models/IOrderRecord"
+import _ from "lodash";
 
 export default interface IProductOrderWidgetProps extends IOrderRecord {
   // product: Product;
@@ -52,7 +53,7 @@ export function ProductOrderWidget(props: IProductOrderWidgetProps) {
               label="Age"
               onChange={(e) => onSizeChangeHandler(Number(e.target.value))}
             >
-              {props.OrderProduct.Sizes.map((x) => (
+              {_.uniq(props.OrderProduct.Sizes).map((x) => (
                 <MenuItem key={x} value={x}>{x.toString()}</MenuItem>
               ))}
             </Select>

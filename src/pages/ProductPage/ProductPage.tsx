@@ -9,6 +9,8 @@ import DoneIcon from "@mui/icons-material/Done";
 
 import { ProductDescription } from "./ProductDescription";
 import { ProductOrderWidget } from "./ProductOrderWidget";
+import storage from "../../data/storage";
+import IOrderRecord from "../../Models/IOrderRecord";
 
 export async function productLoader(routeData: any) {
   const result = await new Promise((resolve, reject) => {
@@ -23,14 +25,14 @@ export async function productLoader(routeData: any) {
   // return product;
 }
 
-type Props = {
+type IProductPageProps = {
   onAddToCart?: (product: Product, orderCount: number, size: number, additionalDetails: string) => void;
 };
 
 type State = {};
 
 // export default class Product extends Component<Props, State> {
-export default function ProductPage(props: Props) {
+export default function ProductPage(props: IProductPageProps) {
   const product: Product = useLoaderData() as Product;
   const [mainImageUrl, setMainImageUrl] = useState(product.ImageUrlsShopify[0]);
   const [orderWidgetData, setOrderWidgetData] = useState({
@@ -58,6 +60,17 @@ export default function ProductPage(props: Props) {
   };
 
   const onAddToCartHandler = () => {
+    let cart = storage.get('cart') as Array<IOrderRecord> || [];
+    cart.push({
+        OrderRecordId: crypto.randomUUID(),
+        OrderProduct: product,
+        OrderCount: orderWidgetData.orderCount,
+        OrderSize: orderWidgetData.size,
+        OrderAdditionalDetails: orderWidgetData.additionalDetails
+    });
+    storage.set('cart', cart);
+    console.log('cart updated');
+    
     if (props.onAddToCart)
       return props.onAddToCart(
         product,
