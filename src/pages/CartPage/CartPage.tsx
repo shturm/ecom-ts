@@ -24,7 +24,7 @@ import { CartOrderRecord } from "./CartOrderRecord";
 import IOrderRecord from "../../Models/IOrderRecord";
 import storage from "../../data/storage";
 import { Link } from "react-router-dom";
-import { CartForm } from "./CartForm";
+import { CartForm, ICartForm } from "./CartForm";
 
 type ICartPageProps = {
   orderRecords?: IOrderRecord[];
@@ -74,6 +74,32 @@ export default function CartPage(props: ICartPageProps) {
     storage.set("cart", cart);
     setOrderRecords(cart);
   };
+
+  const onSubmit = async (formData: ICartForm) => {
+    const data = {
+      items: orderRecords.map((x) => {
+        return {
+        index: x.OrderProduct.Index,
+        internalName: x.OrderProduct.InternalName,
+        count: x.OrderCount,
+        size: x.OrderSize,
+        additionalDetails: x.OrderAdditionalDetails
+      };
+      }),
+      ...formData
+    };
+    // todo: send email
+    const response = await window.fetch('/cart.php', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json; charset=utf8',
+
+      }
+    });
+    
+    console.log("CartPage.onSubmit", data);
+  }
 
   return (
     <React.Fragment>
@@ -186,7 +212,7 @@ export default function CartPage(props: ICartPageProps) {
         </Grid>
 
         <Grid item lg={12} md={12} xs={12} mt={2}>
-          <CartForm></CartForm>
+          <CartForm onValidSubmission={onSubmit}></CartForm>
         </Grid>
 
         {/* <Grid item lg={6} md={6} xs={12}>
