@@ -83,9 +83,12 @@ export default function CartPage(props: ICartPageProps) {
         internalName: x.OrderProduct.InternalName,
         count: x.OrderCount,
         size: x.OrderSize,
-        additionalDetails: x.OrderAdditionalDetails
+        additionalDetails: x.OrderAdditionalDetails,
+        subTotal: (x.OrderCount * x.OrderProduct.Price).toFixed(2),
+        priceSingle: x.OrderProduct.Price.toFixed(2)
       };
       }),
+      total: _.sum(orderRecords.map((x) => x.OrderCount*x.OrderProduct.Price)).toFixed(2),
       ...formData
     };
     // todo: send email
@@ -93,7 +96,7 @@ export default function CartPage(props: ICartPageProps) {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json; charset=utf8',
+        'Content-Type': 'application/json; charset=utf-8',
 
       }
     });
