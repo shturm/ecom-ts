@@ -5,6 +5,7 @@ import {
   Input,
   InputLabel,
   MenuItem,
+  Modal,
   Select,
   Skeleton,
   Typography,
@@ -20,17 +21,27 @@ import Paper from "@mui/material/Paper";
 import CloseIcon from "@mui/icons-material/Close";
 import _ from "lodash";
 import React from "react";
+import ReactDOM from "react-dom";
 import { CartOrderRecord } from "./CartOrderRecord";
 import IOrderRecord from "../../Models/IOrderRecord";
 import storage from "../../data/storage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartForm, ICartForm } from "./CartForm";
+import {InfoModal} from "../../components/Modal";
 
 type ICartPageProps = {
   orderRecords?: IOrderRecord[];
 };
 
 export default function CartPage(props: ICartPageProps) {
+  const [showSuccessModal, setShowSuccessModal] = React.useState<boolean>(false);
+  const [showServerErrorModal, setShowServerErrorModal] = React.useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const cleanCart = () => {
+    storage.set('cart', []);
+  }
+
   const [orderRecords, setOrderRecords] = React.useState<Array<IOrderRecord>>(
     storage.get("cart")
   );
@@ -75,34 +86,44 @@ export default function CartPage(props: ICartPageProps) {
     setOrderRecords(cart);
   };
 
+
+
   const onSubmit = async (formData: ICartForm) => {
     const data = {
       items: orderRecords.map((x) => {
         return {
-        index: x.OrderProduct.Index,
-        internalName: x.OrderProduct.InternalName,
-        count: x.OrderCount,
-        size: x.OrderSize,
-        additionalDetails: x.OrderAdditionalDetails,
-        subTotal: (x.OrderCount * x.OrderProduct.Price).toFixed(2),
-        priceSingle: x.OrderProduct.Price.toFixed(2)
-      };
+          index: x.OrderProduct.Index,
+          internalName: x.OrderProduct.InternalName,
+          count: x.OrderCount,
+          size: x.OrderSize,
+          additionalDetails: x.OrderAdditionalDetails,
+          subTotal: (x.OrderCount * x.OrderProduct.Price).toFixed(2),
+          priceSingle: x.OrderProduct.Price.toFixed(2),
+        };
       }),
-      total: _.sum(orderRecords.map((x) => x.OrderCount*x.OrderProduct.Price)).toFixed(2),
-      ...formData
+      total: _.sum(
+        orderRecords.map((x) => x.OrderCount * x.OrderProduct.Price)
+      ).toFixed(2),
+      ...formData,
     };
     // todo: send email
-    const response = await window.fetch('/cart.php', {
-      method: 'POST',
+    const response = await window.fetch("/cart.php", {
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-
-      }
+        "Content-Type": "application/json; charset=utf-8",
+      },
     });
-    
+    if (response.ok) {
+      setShowSuccessModal(true);
+      cleanCart();
+      // console.log('showed success modal');
+    } else {
+      setShowServerErrorModal(true);
+    }
+
     console.log("CartPage.onSubmit", data);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -231,8 +252,24 @@ export default function CartPage(props: ICartPageProps) {
           <Grid item lg={6} md={6} xs={12}>
             item 2
           </Grid> */}
-      </Grid>{" "}
+      </Grid>
       {/* container */}
+        <InfoModal
+          setIsOpen={setShowSuccessModal}
+          isOpen={showSuccessModal}
+          onClose={() => navigate('/')}
+        >
+          <h2>Поръчката е приета за обработка</h2>
+          <p>Ще се свържем с Вас на посочените контакти за потвърждение преди да изпратим поръчката.</p>
+        </InfoModal>
+
+        <InfoModal
+          setIsOpen={setShowServerErrorModal}
+          isOpen={showServerErrorModal}
+        >
+          <h2>Получи се грешка</h2>
+          <p>Поръчката ви не беше запазена. Моля, опитайте отново или <Link to={'/contact'}>се свържете с нас.</Link></p>
+        </InfoModal>
     </React.Fragment>
   );
 }
