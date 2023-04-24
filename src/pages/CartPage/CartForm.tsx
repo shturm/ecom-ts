@@ -246,7 +246,7 @@ export function CartForm(props: ICartFormProps) {
           </FormControl>
           {paymentMethod == "iban" && (
             <>
-              <p>IBAN:</p>
+              <p>IBAN: BG51 UBBS 8002 1021 0533 50</p>
               <p>Основание: (името на получателя)</p>
             </>
           )}

@@ -44,7 +44,7 @@ export const navItems = [
   { href: "/protectionCategory/O1", title: "O1" },
   { href: "/protectionCategory/O2", title: "O2" },
   { href: "/protectionCategory/O3", title: "O3" },
-  { href: "/contact", title: "Контакт", disabled: true },
+  { href: "/contact", title: "Контакт" },
   // { href: "/category", title: "Category" },
   { href: "/search", title: "Търсене", disabled: true },
   { href: "/cart", title: "Количка", icon: <ShoppingCartTwoToneIcon />, disabled: false},
