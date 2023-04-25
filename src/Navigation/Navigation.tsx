@@ -2,7 +2,7 @@ import { createBrowserRouter, Link, useNavigate } from "react-router-dom";
 
 import NotFoundPage from "../pages/NotFoundPage";
 import ContactPage from "../pages/ContactPage";
-import CartPage from "../pages/CartPage";
+import CartPage from "../pages/CartPage/CartPage";
 import ProductPage, { productLoader } from "../pages/ProductPage/ProductPage";
 import Pricing from "../components/Pricing/Pricing";
 import Layout from "../components/Layout/Layout";
@@ -30,15 +30,25 @@ import { Icon, ListItemIcon } from "@mui/material";
 
 import "./Navigation.css";
 import { Product } from "../data/product.types";
+import { ProtectionCategory, protectionCategoryLoader } from "../pages/ProtectionCategory";
 
 export const navItems = [
-  { href: "/product/1337", title: "Product" },
-  { href: "/pricing", title: "Pricing" },
-  { href: "/contact", title: "Contact" },
-  { href: "/category", title: "Category" },
-  { href: "/search", title: "Search" },
-  { href: "/cart", title: "Cart", icon: <ShoppingCartTwoToneIcon /> },
-  { href: "/not-found", title: "Not" },
+  // { href: "/product/1337", title: "Product" },
+  // { href: "/pricing", title: "Pricing" },
+  { href: "/", title: "Всички" },
+  { href: "/protectionCategory/F2A", title: "F2A" },
+  { href: "/protectionCategory/S1", title: "S1" },
+  { href: "/protectionCategory/S2", title: "S2" },
+  { href: "/protectionCategory/S3", title: "S3" },
+  { href: "/protectionCategory/S1P", title: "S1P" },
+  { href: "/protectionCategory/O1", title: "O1" },
+  { href: "/protectionCategory/O2", title: "O2" },
+  { href: "/protectionCategory/O3", title: "O3" },
+  { href: "/contact", title: "Контакт" },
+  // { href: "/category", title: "Category" },
+  { href: "/search", title: "Търсене", disabled: true },
+  { href: "/cart", title: "Количка", icon: <ShoppingCartTwoToneIcon />, disabled: false},
+  // { href: "/not-found", title: "Not" },
 ];
 
 export const router = createBrowserRouter([
@@ -49,6 +59,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "/home", element: <HomePage /> },
+      { path: "/protectionCategory/:pc", element: <ProtectionCategory />, loader: protectionCategoryLoader },
       { path: "/pricing", element: <Pricing /> },
       { path: "/contact", element: <ContactPage /> },
       { path: "/category", element: <CategoryPage /> },
@@ -141,12 +152,12 @@ export function DrawerAppBar(props: Props) {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Link key={item.title} to={item.href}>
-                <Button key={item.title} sx={{ color: "#fff" }}>
+              // <Link key={item.title} to={item.href}>
+                <Button key={item.title} sx={{ color: "#fff" }} disabled={item.disabled} href={item.href}>
                   {item.icon}
                   {item.title}
                 </Button>
-              </Link>
+              // </Link>
             ))}
           </Box>
         </Toolbar>

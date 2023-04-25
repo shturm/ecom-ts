@@ -6,7 +6,8 @@ import { Product } from '../data/product.types'
 import data from '../data/products.json';
 
 
-const featured: Product[] = data.slice(0,6) as Product[];
+// const featured: Product[] = data.slice(0,6) as Product[];
+const featured: Product[] = data as Product[];
 
 export type Props = {
   // aHomeProp: boolean

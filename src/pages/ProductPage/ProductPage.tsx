@@ -9,6 +9,10 @@ import DoneIcon from "@mui/icons-material/Done";
 
 import { ProductDescription } from "./ProductDescription";
 import { ProductOrderWidget } from "./ProductOrderWidget";
+import storage from "../../data/storage";
+import IOrderRecord from "../../Models/IOrderRecord";
+import { ShopMoreModal } from "../../components/Modal/ShopMoreModal";
+import _ from "lodash";
 
 export async function productLoader(routeData: any) {
   const result = await new Promise((resolve, reject) => {
@@ -23,14 +27,21 @@ export async function productLoader(routeData: any) {
   // return product;
 }
 
-type Props = {
-  onAddToCart?: (product: Product, orderCount: number, size: number, additionalDetails: string) => void;
+type IProductPageProps = {
+  onAddToCart?: (
+    product: Product,
+    orderCount: number,
+    size: number,
+    additionalDetails: string
+  ) => void;
 };
 
 type State = {};
 
 // export default class Product extends Component<Props, State> {
-export default function ProductPage(props: Props) {
+export default function ProductPage(props: IProductPageProps) {
+  const [showShopMoreModal, setShowShopMoreModal] =
+    React.useState<boolean>(false);
   const product: Product = useLoaderData() as Product;
   const [mainImageUrl, setMainImageUrl] = useState(product.ImageUrlsShopify[0]);
   const [orderWidgetData, setOrderWidgetData] = useState({
@@ -58,6 +69,27 @@ export default function ProductPage(props: Props) {
   };
 
   const onAddToCartHandler = () => {
+    let cart = (storage.get("cart") as Array<IOrderRecord>) || [];
+    let index = _.findIndex(cart, {
+      OrderProduct: product,
+      OrderSize: orderWidgetData.size,
+    });
+    let updatedRecord = {
+      OrderRecordId: crypto.randomUUID(),
+      OrderProduct: product,
+      OrderCount: orderWidgetData.orderCount,
+      OrderSize: orderWidgetData.size,
+      OrderAdditionalDetails: orderWidgetData.additionalDetails,
+    };
+    if (index != -1) {
+      updatedRecord.OrderCount += cart[index].OrderCount;
+      cart.splice(index, 1, updatedRecord);
+    } else {
+      cart.push(updatedRecord);
+    }
+    storage.set("cart", cart);
+    console.log("cart updated");
+
     if (props.onAddToCart)
       return props.onAddToCart(
         product,
@@ -69,6 +101,8 @@ export default function ProductPage(props: Props) {
       ...orderWidgetData,
       product,
     });
+
+    setShowShopMoreModal(true);
   };
 
   const smallImgStyle = {
@@ -81,7 +115,13 @@ export default function ProductPage(props: Props) {
 
   const ProtectionCategory = () => {
     if (product.ProtectionCategory)
-      return <Chip color="success" label={product.ProtectionCategory} icon={<DoneIcon />} />;
+      return (
+        <Chip
+          color="success"
+          label={product.ProtectionCategory}
+          icon={<DoneIcon />}
+        />
+      );
     return null;
   };
 
@@ -89,7 +129,12 @@ export default function ProductPage(props: Props) {
     <Grid container spacing={2}>
       <Grid item xs={6} md={6}>
         <Box>
-          <img src={mainImageUrl} alt={product.InternalName} width={450} height={450} />
+          <img
+            src={mainImageUrl}
+            alt={product.InternalName}
+            width={450}
+            height={450}
+          />
         </Box>
         <Box>
           {product.ImageUrlsShopify.map((url) => (
@@ -115,9 +160,13 @@ export default function ProductPage(props: Props) {
           OrderCount={orderWidgetData.orderCount}
           OrderSize={orderWidgetData.size}
           OrderAdditionalDetails={orderWidgetData.additionalDetails}
-          onAdditionalDetailsChange={(val) => setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })}
+          onAdditionalDetailsChange={(val) =>
+            setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })
+          }
           onOrderCountChange={onOrderCountChange}
-          onSizeChange={(val) => setOrderWidgetData({ ...orderWidgetData, size: val })}
+          onSizeChange={(val) =>
+            setOrderWidgetData({ ...orderWidgetData, size: val })
+          }
           onAddToCart={onAddToCartHandler}
         />
       </Grid>
@@ -128,12 +177,21 @@ export default function ProductPage(props: Props) {
           OrderCount={orderWidgetData.orderCount}
           OrderSize={orderWidgetData.size}
           OrderAdditionalDetails={orderWidgetData.additionalDetails}
-          onAdditionalDetailsChange={(val) => setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })}
+          onAdditionalDetailsChange={(val) =>
+            setOrderWidgetData({ ...orderWidgetData, additionalDetails: val })
+          }
           onOrderCountChange={onOrderCountChange}
-          onSizeChange={(val) => setOrderWidgetData({ ...orderWidgetData, size: val })}
+          onSizeChange={(val) =>
+            setOrderWidgetData({ ...orderWidgetData, size: val })
+          }
           onAddToCart={onAddToCartHandler}
         />
       </Grid>
+
+      <ShopMoreModal
+        setIsOpen={setShowShopMoreModal}
+        isOpen={showShopMoreModal}
+      ></ShopMoreModal>
     </Grid>
   );
 }

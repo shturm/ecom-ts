@@ -4,11 +4,13 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Chip,
   Container,
   Grid,
   Skeleton,
   Typography,
 } from "@mui/material";
+import DoneIcon from "@mui/icons-material/Done";
 import { Box } from "@mui/system";
 import * as React from "react";
 import { Product } from "../../data/product.types";
@@ -18,6 +20,11 @@ import { productLoader } from "../../pages/ProductPage/ProductPage";
 export interface IProductTileProps {
   product: Product;
 }
+
+const ProtectionCategoryChip = (props: {pc: string}) => {
+  if (!props.pc) return null;
+  return <Chip color="success" label={props.pc} icon={<DoneIcon />} />;
+};
 
 export function ProductTile(props: IProductTileProps) {
   const navigate = useNavigate();
@@ -33,7 +40,7 @@ export function ProductTile(props: IProductTileProps) {
       <Grid item xs={12} sm={6} md={4} lg={4}>
         <Card onClick={(e) => navigate(`/product/${props.product.Index}`)} sx={sxHover}>
           <CardHeader
-            // title={props.product.InternalName}
+            // title={protectionCategoryChip(props.product.ProtectionCategory)}
             subheader={props.product.InternalName}
             titleTypographyProps={{ align: "center" }}
             subheaderTypographyProps={{
@@ -41,9 +48,9 @@ export function ProductTile(props: IProductTileProps) {
               color: "text.primary",
             }}
             sx={{
-                minHeight: 80
+              minHeight: 80,
             }}
-          />
+          ></CardHeader>
           <CardContent>
             <Box
               sx={{
@@ -60,6 +67,10 @@ export function ProductTile(props: IProductTileProps) {
               <Typography component="p" variant="body1" sx={{ color: "text.disabled", fontSize: 11 }}>
                 С включено ДДС
               </Typography>
+              <Box>
+
+                {/* <ProtectionCategoryChip pc={props.product.ProtectionCategory} /> */}
+              </Box>
             </Box>
           </CardContent>
         </Card>
