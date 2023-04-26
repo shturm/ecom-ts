@@ -6,3 +6,4 @@ rm -rf ~/safetyshoes.bg/vite.svg
 rm -rf ~/safetyshoes.bg/.htaccess
 rm -rf ~/safetyshoes.bg/cart.php
 cp -R dist/* ~/safetyshoes.bg/
+cp -R dist/.htaccess ~/safetyshoes.bg/
