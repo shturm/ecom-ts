@@ -14,16 +14,22 @@ export interface IFilters {
   Brands: string[]
   Sizes: string[]
   ProtectionCategories: string[]
+  Models: string[]
 }
 
 export const filterProducts = (products: Product[], filters: IFilters) => {
   const allSizes = _.uniq(products.map((x) => x.Sizes).flat()).map((x)=>x.toString());
   const allBrands = _.uniq(products.map((x) => x.Brand));
+  const allModels = _.uniq(products.map((x) => x.Model));
   const allProtectionCategories = _.uniq(products.map((x) => x.ProtectionCategory));
 
   let result = products;
   if (filters.Brands.length > 0) {
     result = result.filter((x) => filters.Brands.includes(x.Brand));
+  }
+
+  if (filters.Models.length > 0) {
+    result = result.filter((x) => filters.Models.includes(x.Model));
   }
 
   if (filters.Sizes.length > 0) {
@@ -44,16 +50,18 @@ export const filterProducts = (products: Product[], filters: IFilters) => {
 
 export function Filters(props: IFiltersProps) {
   const [brand, setBrand] = React.useState<string[]>([]);
+  const [model, setModel] = React.useState<string[]>([]);
   const [size, setSize] = React.useState<string[]>([]);
   const [protectionCategory, setProtectioncategory] = React.useState<string[]>([]);
 
   React.useEffect(() => {
     props.onChange({
       Brands: brand, 
+      Models: model,
       Sizes: size, 
       ProtectionCategories: protectionCategory
     });
-  }, [brand, size, protectionCategory]);
+  }, [brand, model, size, protectionCategory]);
 
   const onBrandChange = (value: string[]) => {
     setBrand(value);
@@ -67,10 +75,17 @@ export function Filters(props: IFiltersProps) {
     setProtectioncategory(value);
     // console.log("Protection changed to", value);
   };
+  
+  const onModelChange = (value: string[]) => {
+    setModel(value);
+    // console.log("Model changed to", value);
+  }
 
   const brands = _.uniq(props.products.map((x) => x.Brand)).map((x) => {
     return x;
   });
+  const models = _.uniq(props.products.map((x) => x.Model)).sort((a,b) => b.localeCompare(a));
+
   const sizes: string[] = (() => {
     let unflat = props.products.map((x) => x.Sizes);
     let flat = unflat.flat();
@@ -90,7 +105,8 @@ export function Filters(props: IFiltersProps) {
     <React.Fragment>
       <Grid container mt={2}>
         <Filter items={brands} label="Марка" onChangeCallback={onBrandChange} />
-        <Filter items={sizes} label="Размер" onChangeCallback={onSizeChange} />
+        {/* <Filter items={sizes} label="Размер" onChangeCallback={onSizeChange} /> */}
+        <Filter items={models} label="Модел" onChangeCallback={onModelChange} />
         <Filter
           items={protectionCategories}
           label="Стандарт"
