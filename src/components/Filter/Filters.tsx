@@ -21,7 +21,7 @@ export const filterProducts = (products: Product[], filters: IFilters) => {
   const allSizes = _.uniq(products.map((x) => x.Sizes).flat()).map((x)=>x.toString());
   const allBrands = _.uniq(products.map((x) => x.Brand));
   const allModels = _.uniq(products.map((x) => x.Model));
-  const allProtectionCategories = _.uniq(products.map((x) => x.ProtectionCategory));
+  const allProtectionCategories = _.uniq(products.map((x) => x.ProtectionCategory)).sort((a,b) => b.localeCompare(a));
 
   let result = products;
   if (filters.Brands.length > 0) {
