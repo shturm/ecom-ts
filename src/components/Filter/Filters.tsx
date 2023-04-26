@@ -21,7 +21,7 @@ export const filterProducts = (products: Product[], filters: IFilters) => {
   const allSizes = _.uniq(products.map((x) => x.Sizes).flat()).map((x)=>x.toString());
   const allBrands = _.uniq(products.map((x) => x.Brand));
   const allModels = _.uniq(products.map((x) => x.Model));
-  const allProtectionCategories = _.uniq(products.map((x) => x.ProtectionCategory)).sort((a,b) => b.localeCompare(a));
+  const allProtectionCategories = _.uniq(products.map((x) => x.ProtectionCategory));
 
   let result = products;
   if (filters.Brands.length > 0) {
@@ -97,9 +97,7 @@ export function Filters(props: IFiltersProps) {
 
   const protectionCategories = _.uniq(
     props.products.map((x) => x.ProtectionCategory)
-  ).map((x) => {
-    return x;
-  });
+  ).sort((a,b) => b.localeCompare(a));
 
   return (
     <React.Fragment>
