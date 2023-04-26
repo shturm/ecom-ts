@@ -39,6 +39,7 @@ function LayoutContent() {
       {/* <CssBaseline /> */}
       <DrawerAppBar/>
       <Container component="main" maxWidth="lg">
+        it works
         <Outlet/>
       </Container>
       
