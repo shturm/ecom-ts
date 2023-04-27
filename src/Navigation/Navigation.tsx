@@ -7,6 +7,7 @@ import ProductPage, { productLoader } from "../pages/ProductPage/ProductPage";
 import Pricing from "../components/Pricing/Pricing";
 import Layout from "../components/Layout/Layout";
 import HomePage from "../pages/HomePage";
+import TermsAndConditionsPage from "../pages/TermsAndConditionsPage";
 import { CategoryPage } from "../pages/CategoryPage";
 
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
@@ -82,6 +83,7 @@ export const router = createBrowserRouter([
       { path: "/search/:query", element: <NotFoundPage /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/not-found", element: <NotFoundPage /> },
+      { path: "/toc", element: <TermsAndConditionsPage /> },
       { path: "/not-found", element: <NotFoundPage /> },
     ],
   },
