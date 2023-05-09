@@ -18,6 +18,17 @@
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:5173/protectionCategory/S1",
             "webRoot": "${workspaceFolder}/src"
-        }
+        },
+        {
+            "name": "Chrome CRA",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceRoot}/src",
+            "userDataDir": "${workspaceRoot}/.vscode/chrome",
+            "sourceMapPathOverrides": {
+              "webpack:///src/*": "${webRoot}/*"
+            }
+          }
     ]
 }
