@@ -9,4 +9,5 @@
   RewriteRule . /index.html [L]
 
   AddHandler cgi-script .rsbin
+
 </IfModule>
