@@ -8,4 +8,5 @@
   RewriteCond %{REQUEST_FILENAME} !-l
   RewriteRule . /index.html [L]
 
+  AddHandler cgi-script .rsbin
 </IfModule>
