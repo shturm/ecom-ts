@@ -31,6 +31,7 @@ import { Icon, ListItemIcon } from "@mui/material";
 import "./Navigation.css";
 import { Product } from "../data/product.types";
 import { ProtectionCategory, protectionCategoryLoader } from "../pages/ProtectionCategory";
+import { TermsAndContiionsPage } from "../pages/TermsAndConditions";
 
 export const navItems = [
   // { href: "/product/1337", title: "Product" },
@@ -63,6 +64,7 @@ export const router = createBrowserRouter([
       { path: "/pricing", element: <Pricing /> },
       { path: "/contact", element: <ContactPage /> },
       { path: "/category", element: <CategoryPage /> },
+      { path: "/toc", element: <TermsAndContiionsPage /> },
       {
         path: "/product/:productId",
         element: (
