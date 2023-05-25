@@ -10,6 +10,7 @@ export interface IProductDescriptionProps {
 export function ProductDescription(props: IProductDescriptionProps) {
   return (
     <React.Fragment>
+      <ProductDescriptionDetail label="Артикулен номер" value={props.product.Index} />
       <ProductDescriptionDetail label="Карта спецификации" value={props.product.CardUrl} />
       <ProductDescriptionDetail label="Марка" value={props.product.Brand} />
       <ProductDescriptionDetail label="Линия" value={props.product.Line} />

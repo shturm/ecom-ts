@@ -8,6 +8,7 @@ import {
   Radio,
   RadioGroup,
   TextField,
+  Typography,
 } from "@mui/material";
 
 import * as React from "react";
@@ -218,12 +219,14 @@ export function CartForm(props: ICartFormProps) {
                 onChange={(e) => onAdditionalDetailsChange(e.target.value)}
               />
             </Grid>
+              <Box padding={2}><Typography >Доставката до офис на Спиди е безплатна. Всички други доставки са за сметка на купувача.</Typography></Box>
           </Grid>
         </fieldset>
 
         <fieldset>
           <legend>Плащане</legend>
           <FormControl>
+            
             <FormLabel id="payway-label">Начин на плащане</FormLabel>
             <RadioGroup
               aria-labelledby="payway-label"
