@@ -32,6 +32,7 @@ import "./Navigation.css";
 import { Product } from "../data/product.types";
 import { ProtectionCategory, protectionCategoryLoader } from "../pages/ProtectionCategory";
 import { TermsAndContiionsPage } from "../pages/TermsAndConditions";
+import { PrivacyPolicy } from "../pages/PrivacyPolicyPage";
 
 export const navItems = [
   // { href: "/product/1337", title: "Product" },
@@ -65,6 +66,7 @@ export const router = createBrowserRouter([
       { path: "/contact", element: <ContactPage /> },
       { path: "/category", element: <CategoryPage /> },
       { path: "/toc", element: <TermsAndContiionsPage /> },
+      { path: "/privacy", element: <PrivacyPolicy /> },
       {
         path: "/product/:productId",
         element: (

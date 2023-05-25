@@ -7,7 +7,8 @@ function Copyright(props: any) {
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
         <Link color="inherit" href="https://safetyshoes.bg/">Safetyshoes.bg</Link>{' '}{new Date().getFullYear()}{'. '}
-        <Link color="inherit" href="/toc">Условия за ползване</Link>
+        <Link color="inherit" href="/toc">Условия за ползване.&nbsp;</Link>
+        <Link color="inherit" href="/privacy">Политика за поверителност</Link>
       </Typography>
       
         </>
