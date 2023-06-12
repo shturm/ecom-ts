@@ -19,9 +19,11 @@
 
 void Main()
 {
-	JArray json = JArray.Parse(File.ReadAllText(@"E:\SRC\simpl2\src\SimplCommerce.WebHost\data_import\catalog_bg.json"));
-	JArray jsonWPrices = JArray.Parse(File.ReadAllText(@"E:\SRC\simpl2\src\SimplCommerce.WebHost\data_import\catalog_prices.json"));
-	XElement xml = XElement.Parse(File.ReadAllText(@"E:\SRC\simpl2\src\SimplCommerce.WebHost\data_import\catalog_en.xml"));
+	string outputPath = @"E:\SRC\ecom\src\data\products_new.json";
+	JArray json = JArray.Parse(File.ReadAllText(@"E:\SRC\ecom\data_import\catalog_bg.json"));
+	JArray jsonWPrices = JArray.Parse(File.ReadAllText(@"E:\SRC\ecom\data_import\catalog_prices.json"));
+	//XElement xml = XElement.Parse(File.ReadAllText(@"E:\SRC\ecom\data_import\catalog_en.xml"));
+	XElement xml = XElement.Parse(File.ReadAllText(@"E:\SRC\ecom\data_import\catalog_en2.xml"));
 
 	List<Product> eligibleProducts = ReadProducts(json, xml, jsonWPrices);
 	eligibleProducts.Select(p => new {
@@ -34,12 +36,13 @@ void Main()
 		p.Categories
 	})
 	.OrderByDescending(p => p.IndustriesJson.Count());
+	$"Eligible products count: {eligibleProducts.Count()}".Dump();
 	//.Dump("Subset of props");
 
-	JsonConvert.SerializeObject(eligibleProducts, new Newtonsoft.Json.Formatting()
-	{
-		
-	}).Dump();
+	//var formatting = new Newtonsoft.Json.Formatting() {	};
+	string productsJson = JsonConvert.SerializeObject(eligibleProducts, Newtonsoft.Json.Formatting.Indented);
+	File.WriteAllText(outputPath, productsJson);
+	$"Written output to {outputPath}".Dump();
 	
 	//var cats = ExtractCategories(eligibleProducts);
 	//cats.Dump("Categories");
@@ -48,7 +51,7 @@ void Main()
 
 // Universal Product read
 
-List<Product> ReadProducts (JArray json, XElement xml, JArray jsonWPrices)
+List<Product> ReadProducts (JArray json, XElement xml, JArray jsonWPrices, bool dumpReporting = false)
 {
 	List<Product> products = new List<UserQuery.Product>();
 	
@@ -96,7 +99,7 @@ List<Product> ReadProducts (JArray json, XElement xml, JArray jsonWPrices)
 		if (p == null)
 		{
 			p = new Product();
-			$"XML product #id:{e.Element("id").Value} has no JSON/XLSX record".Dump();
+			if (dumpReporting) $"XML product #id:{e.Element("id").Value} has no JSON/XLSX record".Dump();
 		}
 
 		p.Id = e.Element("id").Value;
@@ -170,7 +173,7 @@ List<Product> ReadProducts (JArray json, XElement xml, JArray jsonWPrices)
 		var product = products.SingleOrDefault(x=>x.Index == index);
 		if (product == null) 
 		{
-			$"[Index]#{index} has a price, but no existing product".Dump();
+			if (dumpReporting) $"[Index]#{index} has a price, but no existing product".Dump();
 			continue;
 		}
 		

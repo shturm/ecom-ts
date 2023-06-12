@@ -1,4 +1,5 @@
 <?php 
+include('send_email.php');
 
 $json = file_get_contents('php://input');
 $data = json_decode($json, TRUE);
@@ -11,17 +12,19 @@ $emailOffice2 = "accuoil@gmail.com";
 
 // $body = json_encode($data, JSON_PRETTY_PRINT);
 // $body = utf8_decode(json_encode($data, JSON_PRETTY_PRINT));
-$body = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE );
 // $body = html_entity_decode(json_encode(array_map('htmlentities', $data), JSON_PRETTY_PRINT));
+// $body = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE ); // works
+$body = buildEmailHtml($data);
 $subject = "Нова поръчка от Safetyshoes.bg";
 
 $headersAdmin =  "From:" . $data['email'] . "\r\n";
-$headersAdmin .= "Content-Type: text/plain; charset=UTF-8" . "\r\n";
+$headersAdmin .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
 $headersAdmin .= "Reply-To: " . $data['email'] . "\r\n";
 
 $headersUser =  "From:" . $emailOffice . "\r\n";
-$headersUser .= "Content-Type: text/plain; charset=UTF-8" . "\r\n";
+$headersUser .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
 $headersUser .= "Reply-To: " . $emailOffice . "\r\n";
+
 
 $sentToAdmin = mail($emailAdmin, $subject, $body, $headersAdmin);
 $sentToUser = mail($emailUser, $subject, $body, $headersUser);
@@ -37,5 +40,6 @@ array_push($result, $data);
 
 header('Content-type: application/json; charset=UTF-8');
 echo json_encode($result);
+// echo $body;
 
 ?>

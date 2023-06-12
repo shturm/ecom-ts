@@ -1,0 +1,27 @@
+<p>Здравейте,</p>
+<p>Получена е нова поръчка от SAFETYSHOES.BG със следните данни:</p>
+<p>
+Име: %CUSTOMER_NAME% <br/>
+Телефон: %CUSTOMER_PHONE% <br/>
+Имейл: %CUSTOMER_EMAIL% <br/>
+Адрес: %CUSTOMER_ADDRESS% <br/>
+Платежен метод: %CUSTOMER_PAYMENT_METHOD% <br/>
+Допълнителни инструкции: %ADDITIONAL_DETAILS% <br/>
+</p>
+<p>Съдържание на поръчката:</p>
+
+%ARTICLE_LIST%
+
+<p>Общата стойност на поръчката е %TOTAL_COST% лв. с включено ДДС.</p>
+Ако сте избрали платежен метод по банков път, можете да платите сумата на следния IBAN: BG51 UBBS 8002 1021 0533 50</p>
+
+<p>
+Ако имате въпроси можете да се свържете с нас: <br/>
+office@safetyshoes.bg <br/>
+тел. 0882056506 <br/>
+</p>
+
+<p>
+Поздрави, <br/>
+Екипа на Safetyshoes.bg <br/>
+</p>
