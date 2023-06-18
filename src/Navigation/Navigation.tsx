@@ -48,7 +48,7 @@ export const navItems = [
   { href: "/protectionCategory/O3", title: "O3" },
   { href: "/contact", title: "Контакт" },
   // { href: "/category", title: "Category" },
-  { href: "/search", title: "Търсене", disabled: true },
+  // { href: "/search", title: "Търсене", disabled: true },
   { href: "/cart", title: "Количка", icon: <ShoppingCartTwoToneIcon />, disabled: false},
   // { href: "/not-found", title: "Not" },
 ];
@@ -82,7 +82,7 @@ export const router = createBrowserRouter([
         ),
         loader: productLoader,
       },
-      { path: "/search", element: <NotFoundPage /> },
+      // { path: "/search", element: <SearchPage /> },
       { path: "/search/:query", element: <NotFoundPage /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/not-found", element: <NotFoundPage /> },
