@@ -51,8 +51,8 @@ export function Filter(props: IFilterProps) {
     <React.Fragment>
       <Grid
         item
-        lg={4}
-        md={4}
+        lg={3}
+        md={3}
         sm={12}
         sx={
           {

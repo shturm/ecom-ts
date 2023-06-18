@@ -14,7 +14,8 @@ export interface IFilters {
   Brands: string[]
   Sizes: string[]
   ProtectionCategories: string[]
-  Models: string[]
+  Models: string[],
+  ProductTypes: string[]
 }
 
 export const filterProducts = (products: Product[], filters: IFilters) => {
@@ -22,6 +23,7 @@ export const filterProducts = (products: Product[], filters: IFilters) => {
   const allBrands = _.uniq(products.map((x) => x.Brand));
   const allModels = _.uniq(products.map((x) => x.Model));
   const allProtectionCategories = _.uniq(products.map((x) => x.ProtectionCategory));
+  const allProductTypes = _.uniq(products.map((x) => x.ProductType));
 
   let result = products;
   if (filters.Brands.length > 0) {
@@ -40,6 +42,10 @@ export const filterProducts = (products: Product[], filters: IFilters) => {
     result = result.filter((x) => filters.ProtectionCategories.includes(x.ProtectionCategory));
   }
 
+  if (filters.ProductTypes.length > 0) {
+    result = result.filter((x) => filters.ProductTypes.includes(x.ProductType));
+  }
+
   // const filteredByBrands = filters.Brands.length > 0 ? products.filter((x) => _.intersection(filters.Brands, allBrands).length > 0) : products;
   // const thenBySizes = filters.Sizes.length > 0 ? filteredByBrands.filter((x) => _.intersection(filters.Sizes, allSizes).length > 0) : filteredByBrands;
   // const thenByProtectionCategories = filters.ProtectionCategories.length > 0 ? thenBySizes.filter((x) => _.intersection(filters.ProtectionCategories, allProtectionCategories)) : thenBySizes;
@@ -53,15 +59,17 @@ export function Filters(props: IFiltersProps) {
   const [model, setModel] = React.useState<string[]>([]);
   const [size, setSize] = React.useState<string[]>([]);
   const [protectionCategory, setProtectioncategory] = React.useState<string[]>([]);
+  const [productType, setProductType] = React.useState<string[]>([]);
 
   React.useEffect(() => {
     props.onChange({
       Brands: brand, 
       Models: model,
       Sizes: size, 
-      ProtectionCategories: protectionCategory
+      ProtectionCategories: protectionCategory,
+      ProductTypes: productType
     });
-  }, [brand, model, size, protectionCategory]);
+  }, [brand, model, size, protectionCategory, productType]);
 
   const onBrandChange = (value: string[]) => {
     setBrand(value);
@@ -78,6 +86,11 @@ export function Filters(props: IFiltersProps) {
   
   const onModelChange = (value: string[]) => {
     setModel(value);
+    // console.log("Model changed to", value);
+  }
+
+  const onProductTypeChange = (value: string[]) => {
+    setProductType(value);
     // console.log("Model changed to", value);
   }
 
@@ -99,6 +112,8 @@ export function Filters(props: IFiltersProps) {
     props.products.map((x) => x.ProtectionCategory)
   ).sort((a,b) => b.localeCompare(a));
 
+  const productTypes = _.uniq(props.products.map((x) => x.ProductType)).sort((a,b) => b.localeCompare(a));
+
   return (
     <React.Fragment>
       <Grid container mt={2}>
@@ -110,6 +125,7 @@ export function Filters(props: IFiltersProps) {
           label="Стандарт"
           onChangeCallback={onProtectionCategoryChange}
         />
+        <Filter items={productTypes} label="Вид обувка" onChangeCallback={onProductTypeChange} />
       </Grid>
     </React.Fragment>
   );
